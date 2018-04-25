@@ -6,5 +6,4 @@ var HelloWorld = /** @class */ (function () {
 }());
 var hello = new HelloWorld("Hello TypeScript");
 console.log(hello.message);
-console.log("Hello Visual Studio Code");
 //# sourceMappingURL=app.js.map
