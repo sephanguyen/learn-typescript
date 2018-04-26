@@ -1,9 +1,9 @@
 function GetAllBooks() {
     
     let books = [
-        {title: 'Ulysees', author: 'James Joyce', available: true, category: Category.Fiction},
-        {title: 'A Farewell to Arms', author: 'Ernest Hemingway', available: true, category: Category.Fiction},
-        {title: 'I Know Why The Caged Brid Signs', author: 'Maya Angelou', available: true, category : Category.Poetry},
+        {id : 1, title: 'Ulysees', author: 'James Joyce', available: true, category: Category.Fiction},
+        {id : 2, title: 'A Farewell to Arms', author: 'Ernest Hemingway', available: true, category: Category.Fiction},
+        {id : 3, title: 'I Know Why The Caged Brid Signs', author: 'Maya Angelou', available: true, category : Category.Poetry},
     ]
     return books;
 }
@@ -51,6 +51,87 @@ function LogBookTitles(titles : string[]) : void {
 
 // const allBooks = GetAllBooks();
 // LogFirstAvailable(allBooks);
+//************* */
 
-const peotryBooks = GetBookTitlesByCategory(Category.Poetry);
-LogBookTitles(peotryBooks);
+
+
+// const peotryBooks = GetBookTitlesByCategory(Category.Poetry);
+// LogBookTitles(peotryBooks);
+function GetBookByID(id : number) {
+    const allBooks = GetAllBooks();
+    return allBooks.filter(book => book.id === id)[0];
+}
+
+
+function CreateCustumorID(name : string, id : number) : string {
+    return name + id;
+};
+
+function CreateCustomer(name :string, age? : number, city? : string) : void {
+    console.log('Creating customer ' + name);
+
+    if(age) {
+        console.log('Age: ' + age);
+    }
+
+    if(city) {
+        console.log('City: ' + city);
+    }
+}
+
+function CheckOutBooks(customer: string, ...bookIDs : number[]) : string[] {
+    console.log('Checking out books for ' + customer);
+
+    let booksCheckedOut : string[] = [];
+
+    for(let id of bookIDs) {
+        let book = GetBookByID(id);
+        if(book.available) {
+            booksCheckedOut.push(book.title);
+        }
+    }
+    return booksCheckedOut;
+}
+
+function GetTitles(author : string) : string[];
+function GetTitles(available : boolean) : string[];
+function GetTitles(bookProperty : any) : string[] {
+    const allBooks = GetAllBooks();
+    const foundTitles : string[] = [];
+    if (typeof bookProperty == 'string') {
+        for (const book of allBooks) {
+            if(book.author === bookProperty) {
+                foundTitles.push(book.title);
+            }
+        }
+    }
+    else if(typeof bookProperty == 'boolean') {
+        for (const book of allBooks) {
+            if(book.available === bookProperty) {
+                foundTitles.push(book.title);
+            }
+        }
+    }
+    return foundTitles;
+}
+/**********************************************/
+
+let hermansBooks = GetTitles(true);
+hermansBooks.forEach(title => console.log(title));
+
+// let myBooks : string[] = CheckOutBooks('Adam', 1, 3);
+// myBooks.forEach(title => console.log(title));
+
+
+// let x : number;
+// x = 5;
+
+// let IdGenerate : (chars : string, nums : number) => string;
+// IdGenerate = CreateCustumorID;
+// let myID: string = IdGenerate("daniel", 15);
+// console.log(myID);
+
+
+
+// const fictionBooks = GetBookTitlesByCategory(Category.Fiction);
+// fictionBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));

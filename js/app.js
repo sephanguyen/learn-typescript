@@ -1,8 +1,8 @@
 function GetAllBooks() {
     var books = [
-        { title: 'Ulysees', author: 'James Joyce', available: true, category: Category.Fiction },
-        { title: 'A Farewell to Arms', author: 'Ernest Hemingway', available: true, category: Category.Fiction },
-        { title: 'I Know Why The Caged Brid Signs', author: 'Maya Angelou', available: true, category: Category.Poetry },
+        { id: 1, title: 'Ulysees', author: 'James Joyce', available: true, category: Category.Fiction },
+        { id: 2, title: 'A Farewell to Arms', author: 'Ernest Hemingway', available: true, category: Category.Fiction },
+        { id: 3, title: 'I Know Why The Caged Brid Signs', author: 'Maya Angelou', available: true, category: Category.Poetry },
     ];
     return books;
 }
@@ -47,6 +47,74 @@ function LogBookTitles(titles) {
 }
 // const allBooks = GetAllBooks();
 // LogFirstAvailable(allBooks);
-var peotryBooks = GetBookTitlesByCategory(Category.Poetry);
-LogBookTitles(peotryBooks);
+//************* */
+// const peotryBooks = GetBookTitlesByCategory(Category.Poetry);
+// LogBookTitles(peotryBooks);
+function GetBookByID(id) {
+    var allBooks = GetAllBooks();
+    return allBooks.filter(function (book) { return book.id === id; })[0];
+}
+function CreateCustumorID(name, id) {
+    return name + id;
+}
+;
+function CreateCustomer(name, age, city) {
+    console.log('Creating customer ' + name);
+    if (age) {
+        console.log('Age: ' + age);
+    }
+    if (city) {
+        console.log('City: ' + city);
+    }
+}
+function CheckOutBooks(customer) {
+    var bookIDs = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        bookIDs[_i - 1] = arguments[_i];
+    }
+    console.log('Checking out books for ' + customer);
+    var booksCheckedOut = [];
+    for (var _a = 0, bookIDs_1 = bookIDs; _a < bookIDs_1.length; _a++) {
+        var id = bookIDs_1[_a];
+        var book = GetBookByID(id);
+        if (book.available) {
+            booksCheckedOut.push(book.title);
+        }
+    }
+    return booksCheckedOut;
+}
+function GetTitles(bookProperty) {
+    var allBooks = GetAllBooks();
+    var foundTitles = [];
+    if (typeof bookProperty == 'string') {
+        for (var _i = 0, allBooks_2 = allBooks; _i < allBooks_2.length; _i++) {
+            var book = allBooks_2[_i];
+            if (book.author === bookProperty) {
+                foundTitles.push(book.title);
+            }
+        }
+    }
+    else if (typeof bookProperty == 'boolean') {
+        for (var _a = 0, allBooks_3 = allBooks; _a < allBooks_3.length; _a++) {
+            var book = allBooks_3[_a];
+            if (book.available === bookProperty) {
+                foundTitles.push(book.title);
+            }
+        }
+    }
+    return foundTitles;
+}
+/**********************************************/
+var hermansBooks = GetTitles(true);
+hermansBooks.forEach(function (title) { return console.log(title); });
+// let myBooks : string[] = CheckOutBooks('Adam', 1, 3);
+// myBooks.forEach(title => console.log(title));
+// let x : number;
+// x = 5;
+// let IdGenerate : (chars : string, nums : number) => string;
+// IdGenerate = CreateCustumorID;
+// let myID: string = IdGenerate("daniel", 15);
+// console.log(myID);
+// const fictionBooks = GetBookTitlesByCategory(Category.Fiction);
+// fictionBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
 //# sourceMappingURL=app.js.map
