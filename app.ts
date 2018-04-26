@@ -1,4 +1,8 @@
-function GetAllBooks() {
+import { Category } from './enums';
+import { IBook, IDamegeLogger, IAuthor, ILibrarian } from './interfaces';
+import { UniversityLibrarian } from './classes';
+
+function GetAllBooks() : IBook[] {
     
     let books = [
         {id : 1, title: 'Ulysees', author: 'James Joyce', available: true, category: Category.Fiction},
@@ -24,7 +28,6 @@ function LogFirstAvailable(books) : void{
     console.log('First Available: ' + firstAvailable);
 }
 
-enum Category { Biography, Poetry, Fiction, History, Children}
 
 function GetBookTitlesByCategory(categoryFilter : Category) : Array<string> {
 
@@ -57,7 +60,7 @@ function LogBookTitles(titles : string[]) : void {
 
 // const peotryBooks = GetBookTitlesByCategory(Category.Poetry);
 // LogBookTitles(peotryBooks);
-function GetBookByID(id : number) {
+function GetBookByID(id : number) : IBook {
     const allBooks = GetAllBooks();
     return allBooks.filter(book => book.id === id)[0];
 }
@@ -114,24 +117,31 @@ function GetTitles(bookProperty : any) : string[] {
     }
     return foundTitles;
 }
+
+function PrintBook(book : IBook) : void {
+    console.log(book.title + ' by ' + book.author);
+}
 /**********************************************/
 
-let hermansBooks = GetTitles(true);
-hermansBooks.forEach(title => console.log(title));
+let myBook : IBook=  {
+    id : 5,
+    title : 'Pride and Prejudice',
+    author : 'Jane Austen',
+    available : true,
+    category : Category.Fiction,
+    pages : 250,
+    markDamaged : (reason : string) => console.log('Dameged ' + reason)
+}
 
-// let myBooks : string[] = CheckOutBooks('Adam', 1, 3);
-// myBooks.forEach(title => console.log(title));
+// PrintBook(myBook);
+// myBook.markDamaged('missing back cover');
+
+let logDamage : IDamegeLogger;
+logDamage = (damage : string) => console.log('Damege repoted: ' + damage);
+
+logDamage('coffee stains');
 
 
-// let x : number;
-// x = 5;
-
-// let IdGenerate : (chars : string, nums : number) => string;
-// IdGenerate = CreateCustumorID;
-// let myID: string = IdGenerate("daniel", 15);
-// console.log(myID);
-
-
-
-// const fictionBooks = GetBookTitlesByCategory(Category.Fiction);
-// fictionBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
+let favoriteLibrarian : ILibrarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Sharon';
+favoriteLibrarian.assistCustomer('Lynda')
