@@ -1,6 +1,9 @@
 import { Category } from './enums';
 import { IBook, IDamegeLogger, IAuthor, ILibrarian } from './interfaces';
-import { UniversityLibrarian, RefereceItem, Encylopedia } from './classes';
+import { UniversityLibrarian, RefereceItem } from './classes';
+import refBook from './encyclopedia';
+
+let reference = new refBook('Fact book', 2016, 1);
 
 function GetAllBooks() : IBook[] {
     
@@ -127,8 +130,8 @@ function PrintBook(book : IBook) : void {
 // ref.printItem();
 // ref.publisher = 'Random Data Publishing';
 // console.log(ref.publisher);
-let refBook : RefereceItem = new Encylopedia('WordPedia', 1900, 10);
-refBook.printItem();
+// let refBook : RefereceItem = new Encylopedia('WordPedia', 1900, 10);
+// refBook.printItem();
 
 
 //class expression

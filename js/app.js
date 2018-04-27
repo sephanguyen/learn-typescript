@@ -12,6 +12,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
 var classes_1 = require("./classes");
+var encyclopedia_1 = require("./encyclopedia");
+var reference = new encyclopedia_1.default('Fact book', 2016, 1);
 function GetAllBooks() {
     var books = [
         { id: 1, title: 'Ulysees', author: 'James Joyce', available: true, category: enums_1.Category.Fiction },
@@ -118,8 +120,8 @@ function PrintBook(book) {
 // ref.printItem();
 // ref.publisher = 'Random Data Publishing';
 // console.log(ref.publisher);
-var refBook = new classes_1.Encylopedia('WordPedia', 1900, 10);
-refBook.printItem();
+// let refBook : RefereceItem = new Encylopedia('WordPedia', 1900, 10);
+// refBook.printItem();
 //class expression
 var NewSpaper = /** @class */ (function (_super) {
     __extends(class_1, _super);
