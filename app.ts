@@ -1,6 +1,6 @@
 import { Category } from './enums';
 import { IBook, IDamegeLogger, IAuthor, ILibrarian } from './interfaces';
-import { UniversityLibrarian } from './classes';
+import { UniversityLibrarian, RefereceItem, Encylopedia } from './classes';
 
 function GetAllBooks() : IBook[] {
     
@@ -122,26 +122,21 @@ function PrintBook(book : IBook) : void {
     console.log(book.title + ' by ' + book.author);
 }
 /**********************************************/
+ 
+// let ref : RefereceItem = new RefereceItem('Facts and Figures', 2016);
+// ref.printItem();
+// ref.publisher = 'Random Data Publishing';
+// console.log(ref.publisher);
+let refBook : RefereceItem = new Encylopedia('WordPedia', 1900, 10);
+refBook.printItem();
 
-let myBook : IBook=  {
-    id : 5,
-    title : 'Pride and Prejudice',
-    author : 'Jane Austen',
-    available : true,
-    category : Category.Fiction,
-    pages : 250,
-    markDamaged : (reason : string) => console.log('Dameged ' + reason)
+
+//class expression
+let NewSpaper = class extends RefereceItem {
+    printCitation(): void {
+        console.log(`Newspaper: ${this.title}`);
+    }
 }
 
-// PrintBook(myBook);
-// myBook.markDamaged('missing back cover');
-
-let logDamage : IDamegeLogger;
-logDamage = (damage : string) => console.log('Damege repoted: ' + damage);
-
-logDamage('coffee stains');
-
-
-let favoriteLibrarian : ILibrarian = new UniversityLibrarian();
-favoriteLibrarian.name = 'Sharon';
-favoriteLibrarian.assistCustomer('Lynda')
+let myPaper = new NewSpaper('The Gazette', 2016);
+myPaper.printCitation();

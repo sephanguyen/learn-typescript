@@ -1,4 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
 var classes_1 = require("./classes");
@@ -104,21 +114,23 @@ function PrintBook(book) {
     console.log(book.title + ' by ' + book.author);
 }
 /**********************************************/
-var myBook = {
-    id: 5,
-    title: 'Pride and Prejudice',
-    author: 'Jane Austen',
-    available: true,
-    category: enums_1.Category.Fiction,
-    pages: 250,
-    markDamaged: function (reason) { return console.log('Dameged ' + reason); }
-};
-// PrintBook(myBook);
-// myBook.markDamaged('missing back cover');
-var logDamage;
-logDamage = function (damage) { return console.log('Damege repoted: ' + damage); };
-logDamage('coffee stains');
-var favoriteLibrarian = new classes_1.UniversityLibrarian();
-favoriteLibrarian.name = 'Sharon';
-favoriteLibrarian.assistCustomer('Lynda');
+// let ref : RefereceItem = new RefereceItem('Facts and Figures', 2016);
+// ref.printItem();
+// ref.publisher = 'Random Data Publishing';
+// console.log(ref.publisher);
+var refBook = new classes_1.Encylopedia('WordPedia', 1900, 10);
+refBook.printItem();
+//class expression
+var NewSpaper = /** @class */ (function (_super) {
+    __extends(class_1, _super);
+    function class_1() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    class_1.prototype.printCitation = function () {
+        console.log("Newspaper: " + this.title);
+    };
+    return class_1;
+}(classes_1.RefereceItem));
+var myPaper = new NewSpaper('The Gazette', 2016);
+myPaper.printCitation();
 //# sourceMappingURL=app.js.map
