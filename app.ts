@@ -1,6 +1,8 @@
 import { Category } from './enums';
 import { IBook, IDamegeLogger, IAuthor, ILibrarian } from './interfaces';
-import { UniversityLibrarian, RefereceItem } from './classes';
+import { UniversityLibrarian, RefereceItem, IMagazine } from './classes';
+import {Purge} from './lib/utilityFunctions'
+import Shelf from './shelf';
 import refBook from './encyclopedia';
 
 let reference = new refBook('Fact book', 2016, 1);
@@ -135,11 +137,42 @@ function PrintBook(book : IBook) : void {
 
 
 //class expression
-let NewSpaper = class extends RefereceItem {
-    printCitation(): void {
-        console.log(`Newspaper: ${this.title}`);
-    }
-}
+// let NewSpaper = class extends RefereceItem {
+//     printCitation(): void {
+//         console.log(`Newspaper: ${this.title}`);
+//     }
+// }
 
-let myPaper = new NewSpaper('The Gazette', 2016);
-myPaper.printCitation();
+// let myPaper = new NewSpaper('The Gazette', 2016);
+// myPaper.printCitation();
+
+let inventory: Array<IBook> = [
+    { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Sowftware},
+    { id: 11, title: 'Code Complete', author: 'Steve McConnel', available: true, category: Category.Sowftware},
+    { id: 12, title: '8-Bit Graphics with Colbol', author: 'A. B.', available: true, category: Category.Sowftware},
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D. ', available: true, category: Category.Sowftware}
+]
+let purgedBooks: Array<IBook> = Purge<IBook>(inventory);
+purgedBooks.forEach(book => console.log(book.title));
+
+let purgedNumbers: Array<number> = Purge<number>([1, 2, 3]);
+console.log(purgedNumbers);
+
+let bookShelf: Shelf<IBook> = new Shelf<IBook>();
+inventory.forEach(book => bookShelf.add(book));
+
+let firtsBook: IBook = bookShelf.getFirst();
+
+let magazines: Array<IMagazine> = [
+    {title: 'Programming Language Monthly', publisher: 'Code Mags'},
+    {title: 'Literary Fiction Quartely', publisher: 'College Press'},
+    {title: 'Five Points', publisher: 'GSU'},
+]
+
+let magazineShelf: Shelf<IMagazine> = new Shelf<IMagazine>();
+magazines.forEach(mag => magazineShelf.add(mag));
+let firstMagazine: IMagazine = magazineShelf.getFirst();
+magazineShelf.printTitles();
+
+let softwareBook = bookShelf.find('Code Complete');
+console.log(`${softwareBook.title} (${softwareBook.author})`)

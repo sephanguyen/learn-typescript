@@ -33,5 +33,9 @@ abstract class RefereceItem {
     abstract printCitation(): void;
 }
 
+interface IMagazine {
+    title: string;
+    publisher: string;
+}
 
-export { UniversityLibrarian, RefereceItem };
+export { UniversityLibrarian, RefereceItem, IMagazine };

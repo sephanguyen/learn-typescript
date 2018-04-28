@@ -7,6 +7,7 @@ var Category;
     Category[Category["Fiction"] = 2] = "Fiction";
     Category[Category["History"] = 3] = "History";
     Category[Category["Children"] = 4] = "Children";
+    Category[Category["Sowftware"] = 5] = "Sowftware";
 })(Category || (Category = {}));
 exports.Category = Category;
 //# sourceMappingURL=enums.js.map

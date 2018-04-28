@@ -1,17 +1,8 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
-var classes_1 = require("./classes");
+var utilityFunctions_1 = require("./lib/utilityFunctions");
+var shelf_1 = require("./shelf");
 var encyclopedia_1 = require("./encyclopedia");
 var reference = new encyclopedia_1.default('Fact book', 2016, 1);
 function GetAllBooks() {
@@ -123,16 +114,35 @@ function PrintBook(book) {
 // let refBook : RefereceItem = new Encylopedia('WordPedia', 1900, 10);
 // refBook.printItem();
 //class expression
-var NewSpaper = /** @class */ (function (_super) {
-    __extends(class_1, _super);
-    function class_1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    class_1.prototype.printCitation = function () {
-        console.log("Newspaper: " + this.title);
-    };
-    return class_1;
-}(classes_1.RefereceItem));
-var myPaper = new NewSpaper('The Gazette', 2016);
-myPaper.printCitation();
+// let NewSpaper = class extends RefereceItem {
+//     printCitation(): void {
+//         console.log(`Newspaper: ${this.title}`);
+//     }
+// }
+// let myPaper = new NewSpaper('The Gazette', 2016);
+// myPaper.printCitation();
+var inventory = [
+    { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: enums_1.Category.Sowftware },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnel', available: true, category: enums_1.Category.Sowftware },
+    { id: 12, title: '8-Bit Graphics with Colbol', author: 'A. B.', available: true, category: enums_1.Category.Sowftware },
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D. ', available: true, category: enums_1.Category.Sowftware }
+];
+var purgedBooks = utilityFunctions_1.Purge(inventory);
+purgedBooks.forEach(function (book) { return console.log(book.title); });
+var purgedNumbers = utilityFunctions_1.Purge([1, 2, 3]);
+console.log(purgedNumbers);
+var bookShelf = new shelf_1.default();
+inventory.forEach(function (book) { return bookShelf.add(book); });
+var firtsBook = bookShelf.getFirst();
+var magazines = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quartely', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' },
+];
+var magazineShelf = new shelf_1.default();
+magazines.forEach(function (mag) { return magazineShelf.add(mag); });
+var firstMagazine = magazineShelf.getFirst();
+magazineShelf.printTitles();
+var softwareBook = bookShelf.find('Code Complete');
+console.log(softwareBook.title + " (" + softwareBook.author + ")");
 //# sourceMappingURL=app.js.map
